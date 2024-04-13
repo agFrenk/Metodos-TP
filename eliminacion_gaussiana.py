@@ -117,7 +117,7 @@ def coeficientes_elim_gauss_tridiaognal(M):
   return coeficientes_computados
 
 def term_indep_elim_gauss_tridiagonal(M, coeficientes_computados):
-terminos_indep_computados = []
+  terminos_indep_computados = []
   for i in range(0, len(M))
     d_prima = 0
     if i == 0:
