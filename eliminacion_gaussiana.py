@@ -1,8 +1,12 @@
+import sys
+import numpy as np
+
+
 #Punto 1
-a_matrix =         [[ 1,  1,  1,  1, 10],
+a_matrix =         np.array([[ 1,  1,  1,  1, 10],
                     [ 1,  1,  1,  1, 11],
                     [ 1,  1,  1,  1, 12],
-                    [ 1,  1,  1,  1, 13]]
+                    [ 1,  1,  1,  1, 13]])
 
 
 ##item a
@@ -36,6 +40,9 @@ b_matrix =         [[ 1,  1,  1,  1, 10],
 #print(solve_sys_EGsin(b_matrix))
 
 #Punto 2
+
+a = np.array([[ 1,  2],
+              [3, 4]])
 
 
 a_matrix2 = np.array([[ 1,  1,  0,  0, 0],
@@ -91,4 +98,38 @@ def solve_sys_EG(M):
     b.append(M[i][len(M[0])-1])
   return b
 
-print(elim_gauss_con_pivot(a_matrix2))
+def print_matrix(M):
+  for i in M:
+    print(i)
+
+# print(isinstance(elim_gauss_con_pivot(a_matrix2, 0.00011), np.ndarray) ) 
+
+def coeficientes_elim_gauss_tridiaognal(M):
+  coeficientes_computados = []
+  for i in range(0, len(M))
+    c_prima = 0
+    if i == 0:
+      c_prima = M[i][i + 1] /  M[i][i]
+    else:
+      c_prima = M[i][i + 1] /  M[i][i] - M[i][i - 1] * coeficientes_computados[i-1] #un coeficientes_computados.pop() tambien funcionaria
+
+    coeficientes_computados.append(c_prima)
+  return coeficientes_computados
+
+def term_indep_elim_gauss_tridiagonal(M, coeficientes_computados):
+terminos_indep_computados = []
+  for i in range(0, len(M))
+    d_prima = 0
+    if i == 0:
+      d_prima = M[i][i + 1] /  M[i][i]
+    else:
+      d_prima = (M[i][i + 1] + M[i][i - 1] * terminos_indep_computados[i - 1]) /  (M[i][i] - M[i][i - 1] * coeficientes_computados[i-1]) #un coeficientes_computados.pop() tambien funcionaria
+
+    terminos_indep_computados.append(d_prima)
+  return terminos_indep_computados  
+
+def elim_gauss_tridiaognal(M):
+  coeficientes = coeficientes_elim_gauss_tridiaognal(M)
+  terminos_independientes = term_indep_elim_gauss_tridiagonal(M, coeficientes)
+
+  ## falta reconstruir la solucion por back
