@@ -1,5 +1,5 @@
 # Resolución TP 1
-Todo el codigo esta contenido dentro de un notebook llamado `resolucion_tp.ipynb`.
+Todo el codigo esta contenido dentro de un notebook llamado `resolucion_tp.ipynb`. Los valores en los experimentos no son los repotados en el informe ya que valores tan altos demoraban mucho su ejecucion.
 
 ## Requisitos Previos
 
@@ -8,9 +8,12 @@ Es necesario tener instalado Python y Jupyter Notebook, como también las siguie
 - numpy
 - matplotlib
 
+## funciones auxiliares
+Para borrar los datos y las imagenes que crean los experimentos agregamos una funcion al final del codigo llamada `borrar_txt_y_png()` que te liberar tu carpeta de los archivos generados por nuestro codigo. LA LLAMADA A LA FUNCION ESTA COMENTADA.
+
 ## Funciones importantes
 ### Ejercicio 1
-Para resolver un sistema de ecuaciones con Eliminación Gaussiana sin pivoteo hay que correr la función `solve_sys_EGsin(M)`, con M una matriz extendida.
+Para resolver un sistema de ecuaciones con Eliminación Gaussiana sin pivoteo hay que correr la función `solve_sys_EGsin(M)`, con M una matriz extendida. `triangular_sin_pivot(M)` recibe una matriz extendida y te la devuelve triangulada. 
 
 ### Ejercicio 2
 Para resolver un sistema de ecuaciones con float de 32 bits usando Eliminación Gaussiana con pivoteo hay que correr `solve_sys_EG32(M, threshold)`, donde M es una matriz extendida y threshold es el valor con el cual se compara si algo es cercano a 0.
@@ -44,17 +47,24 @@ En nuestro caso, los arreglos d_a, d_b, y d_c fueron proporcionados en la consig
 ### Ejercicio 5
 ### Ítem a
 ### Experimentación - Medición de tiempos de Cómputo EG Pivot vs. EG Tridiagonal
-Para relizar el experimento de medición de tiempos de Cómputo EG vs. EG pivot debemos llamar a la función `experimentoEG_EGT():` . Esta función llama a su vez a la función `create_laplaciano_testing_instace()` para crear distintas instancias de sistemas de ecuaciones tridiagonales, asociados siempre a la matriz Laplaciana, pero variando en el tamaño de la matriz. Luego compara el tiempo que tarda cada uno de los dos algoritmos en resolver el sistema. Para ver los resultados gráficamente, hay que llamar a la función `plot_eg()`
+Para relizar el experimento de medición de tiempos de Cómputo EG vs. EG pivot. Se debecorrer la celda con el titulo `analisis de datos punto 5.a`, depues de correr esta celda se van a setear los datos a las listas `resultsEG` `resultsEGT` y `instance_size` que nos permitiran crear los graficos. Esta función llama a su vez a la función `create_laplaciano_testing_instace()` para crear distintas instancias de sistemas de ecuaciones tridiagonales, asociados siempre a la matriz Laplaciana, pero variando en el tamaño de la matriz. Luego compara el tiempo que tarda cada uno de los dos algoritmos en resolver el sistema. Para ver los resultados gráficamente, hay que llamar a la función `plot_eg()`
 
 ### Ejercicio 5
 ### Ítem b
 ### Experimentación - Medición de tiempos de Cómputo EG tridiagonal vs. Algoritmo de Thomas
-Para relizar el experimento de medición de tiempos de Cómputo EG Tridiagonal vs. Algoritmo de Thomas debemos llamar a la función `experimentoEGT_ThA()`. Esta función resolverá el sistema para la matriz Laplaciana de tamaño 100, y medirá el tiempo que tarda cada algoritmo en resolverlo para una determinada cantidad de repeticiones. Para ver los resultados gráficamente, hay que llamar a la función `plot_eg()`
+Para relizar el experimento de medición de tiempos de Cómputo EG Tridiagonal vs. Algoritmo de Thomas. Se debecorrer la celda con el titulo `analisis de datos punto 5.b`, depues de correr esta celda se van a setear los datos a las listas `resultsEGPrecomputo` `resultsEGTridiagonal` y `repeticiones` que nos permitiran crear los graficos. Esta función resolverá el sistema para la matriz Laplaciana de tamaño 100, y medirá el tiempo que tarda cada algoritmo en resolverlo para una determinada cantidad de repeticiones. Para ver los resultados gráficamente, hay que llamar a la función `plot_eg()`
 
 ## Ejercicio 6
 
+Para simular el proceso de difusión primero deben crearse las matrices correspondientes la expresión implicita o explícita detalladas en el informe. Esto se hace con los métodos  `create_matrix_explicito(alpha)` y  `create_matrix_implicito(alpha)` donde alpha es el coeficiente de difusión deseado. 
+Si se quiere replicar el experimento realizado en el tp se puede crear la instancia de condicion inicial con el metodo `create_u0(n,r)` donde n y r son los definidos en el enunciado.
 
+Para simular el proceso de difusion con el metodo explicito se debe correr la funcion `sim_explicita(u_0, A, m)` donde `u_0` es un vector con las condiciones iniciales, `A` es la matriz correspondiente al metodo explicito y `m` es la cantidad de iteraciones del proceso de difusion a simular. 
+Para obtener el heatmap se debe correr el metodo `grafico_explicita()`.
+Para replicar la busqueda del rango en el cual el sistema es inestable se debe correr la funcion `binary_search_alpha(low, high, tol)` con `low = 0.5`, `high = 3.0` y `tol = 0.00001`.
 
+Para simular el proceso de difusion con el metodo implicito se debe correr la funcion `sim_implicita(u_0, A, m)` donde `u_0` es un vector con las condiciones iniciales, `A` es la matriz correspondiente al metodo implicito y `m` es la cantidad de iteraciones del proceso de difusion a simular.
+Para obtener el heatmap se debe correr el metodo `grafico_implicita()`.
 
 
 
