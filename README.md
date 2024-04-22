@@ -33,7 +33,7 @@ Para resolver el sistema de ecuaciones usando el algoritmo de Thomas con precóm
 
 Si queremos precomputar los datos debemos llamar `precomputo_de_thomas_algorithm(a,b,c)`, donde `a`, `b`, `c` significan lo mismo que antes. Esto nos va a devolver una lista de listas con todo lo necesario para resolver el sistema de ecuaciones con un termino independiente dado. Donde en su primer valor va haber una lista de distintos `w`. En el informe se reporta que son los `w`. En el segundo valor de la lista aparecen los `b` ya de el sistema de ecuaciones resueltos.
 
-Si queremos resolver el sistema de ecuaciones con precomputo debemos correr la funcion `thomas_algorithm_precomputo(precomputo, d)` con el precomputo obtenido anteriormente y un vector  que te devuelve una vector `d` con el término independiente.
+Si queremos resolver el sistema de ecuaciones con precomputo debemos correr la funcion `thomas_algorithm_precomputo(precomputo, d)` con el precomputo obtenido anteriormente y un vector `d` con el término independiente, esta funcion te devuelve un la lista solucion.
 
 ### Ejercicio 4
 ### Experimentación - Verificación de la implementación del método tridiagonal
