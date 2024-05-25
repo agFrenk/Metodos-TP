@@ -8,13 +8,14 @@ using Eigen::VectorXd;
 
 #define forn(i, n) for(int i=0; i<n; i++)
 
-pair<double,VectorXd> power_iteration(const MatrixXd& A, int niter = 10000, double eps= 1e-6) {
+pair<pair<double,VectorXd>, double> power_iteration(const MatrixXd& A, int niter = 10000, double eps= 1e-6) {
     const int m = A.rows();
     VectorXd v(m);
     forn(i,m){
-        v[i]=1.0;
+        v[i]=rand();
     }
     double l = 0;
+    double error =0;
     forn(i, niter){
         v = A*v;
         v.normalize();
@@ -22,16 +23,15 @@ pair<double,VectorXd> power_iteration(const MatrixXd& A, int niter = 10000, doub
             cout << v[i] << " ";
         }
         cout << '\n';
-
         l = (v.transpose() * A * v ).value() / (v.transpose() * v).value();
         if((A*v-l*v).norm()<= eps){
-            double error = (A*v-l*v).squaredNorm();
+            error = (A*v-l*v).squaredNorm();
             break;
         }
         cout << "l:" << " "<< l << '\n';
     }
     l = (v.transpose() * A * v ).value()/ (v.transpose()*v).value();
-    return {l,v};
+    return {{l,v}, error};
 }
 
 pair<vector<double>, vector<VectorXd>> power_iteration_deflation(MatrixXd A, int num=2, int niter=1000, double eps=1e-6){
@@ -41,15 +41,13 @@ pair<vector<double>, vector<VectorXd>> power_iteration_deflation(MatrixXd A, int
     vector<VectorXd> eigenvectors(m);
     VectorXd v(m);
     double l = 0.0;
-    forn(i,m){
-        v[i]=1.0;
-    }
     forn(i,n){
-        MatrixXd B = A - l * (v * v.transpose());
-        pair<double, VectorXd> res = power_iteration(B);
-        eigenvalues.push_back(res.first);
-        eigenvectors[i]=res.second;
-        l = res.first;
+        MatrixXd A = A - l * (v * v.transpose());
+        auto res = power_iteration(A);
+        eigenvalues.push_back(res.first.first);
+        eigenvectors[i]=res.first.second;
+        l = res.first.first;
+        v = res.first.second;
     }
     return {eigenvalues, eigenvectors};
 }
@@ -76,10 +74,10 @@ int main() {
     cout << H << '\n';
     MatrixXd M = H.transpose() * D * H;
     cout << M << '\n';
-    pair<double, VectorXd> res = power_iteration(M);
-    cout << "lambda: " << res.first << '\n';
+    auto res = power_iteration(M);
+    cout << "lambda: " << res.first.first << '\n';
     forn(i,5){
-        cout << res.second(i) << " ";
+        cout << res.first.second(i) << " ";
     }
     return 0;
 }
