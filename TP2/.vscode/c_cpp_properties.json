@@ -3,7 +3,9 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/"
+                "${workspaceFolder}/",
+                "/usr/include/python3.12",
+                "/usr/include/eigen3"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",
