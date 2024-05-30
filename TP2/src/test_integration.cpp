@@ -30,7 +30,17 @@ pair<pair<double, VectorXd>, pair<double, int>> power_iteration(const Matrix& A,
     return {{l, v},  {error, iter}};
 }
 
-tuple<vector<double>, vector<VectorXd>, vector<double>, vector<int>> power_iteration_deflation(const Matrix& A, int num, int niter, double eps) {
+MatrixXd convert_and_transpose(vector<VectorXd> v, int  n,int m){
+    MatrixXd A(n,m);
+    forn(i, n){
+        forn(j,m){
+            A(i,j)=v[i][j];
+        }
+    } 
+    return A.transpose();
+}
+
+tuple<vector<double>, MatrixXd, vector<double>, vector<int>> power_iteration_deflation(const Matrix& A, int num, int niter, double eps) {
     Matrix A_copy = A;
     const int m = A.rows();
     vector<double> eigenvalues;
@@ -50,6 +60,7 @@ tuple<vector<double>, vector<VectorXd>, vector<double>, vector<int>> power_itera
         A_copy = A_copy - l * (v * v.transpose());
     }
     
-    return {eigenvalues, eigenvectors, errors, iters};
+    return {eigenvalues, convert_and_transpose(eigenvectors, eigenvectors.size(), eigenvectors[0].size()), errors, iters};
 }
+
 
