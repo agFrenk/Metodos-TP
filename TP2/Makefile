@@ -10,7 +10,7 @@ CXX := g++
 CXXFLAGS := -O3 -Wall -shared -std=c++14 -fPIC $(PYBIND11_INCLUDE) $(PYTHON_INCLUDE) -I$(EIGEN_INCLUDE)
 LDFLAGS := $(PYTHON_LIB)
 
-SRC_FILES := $(SRC_DIR)/metodos.cpp $(SRC_DIR)/test_integration.cpp
+SRC_FILES := $(SRC_DIR)/metodos.cpp $(SRC_DIR)/power_iteration.cpp
 
 all: $(TARGET)
 
